@@ -1,0 +1,34 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite parallel="tests" name="Suite" thread-count="5">
+  <test name="Test1">
+      <parameter name="deviceID" value="AVY9KA9631301284"  />
+      <parameter name="version" value="5.1"  />
+    <classes>
+<!--        <class name="appium.webParralel.LaunchClass"/> --> 
+<!--        <class name="appium.webParralel.GoogleDryRun"/> --> 
+      
+<!-- 			      Native app selecetion --> 
+
+      <class name="appium.webParralel.AppLaunchClass"/>
+      <class name="appium.webParralel.nativeDryRun"/>
+      
+      
+    </classes>
+ </test> 
+ 
+  <test name="Test2">
+      <parameter name="deviceID" value="emulator-5554"  />
+      <parameter name="version" value="6.0"  />
+    <classes>
+<!--       <class name="appium.webParralel.LaunchClass"/> -->
+<!--       <class name="appium.webParralel.GoogleDryRun"/> -->
+    
+    		<!--       Native app selecetion --> 
+
+      <class name="appium.webParralel.AppLaunchClass"/>
+      <class name="appium.webParralel.nativeDryRun"/>
+    
+    </classes>
+ </test> 
+ 
+ </suite> <!-- Suite -->

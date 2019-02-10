@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite parallel="tests" name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <parameter name="deviceID" value="AVY9KA9631301284"/>
+  <parameter name="version" value="5.1"/>
+  <test name="Test1">
+    <parameter name="deviceID" value="AVY9KA9631301284"/>
+    <parameter name="version" value="5.1"/>
+    <classes>
+      <class name="appium.webParralel.AppLaunchClass"/>
+      <class name="appium.webParralel.Swipe"/>
+    </classes>
+  </test> <!-- Test1 -->
+  <test parallel="tests" name="Test1(failed)">
+    <parameter name="deviceID" value="AVY9KA9631301284"/>
+    <parameter name="version" value="5.1"/>
+    <classes>
+      <class name="appium.webParralel.AppLaunchClass">
+        <methods>
+          <include name="beforeSuite"/>
+          <include name="afterSuite"/>
+        </methods>
+      </class> <!-- appium.webParralel.AppLaunchClass -->
+      <class name="appium.webParralel.Swipe">
+        <methods>
+          <include name="swipe"/>
+          <include name="beforeClass"/>
+        </methods>
+      </class> <!-- appium.webParralel.Swipe -->
+    </classes>
+  </test> <!-- Test1(failed) -->
+</suite> <!-- Failed suite [Suite] -->
