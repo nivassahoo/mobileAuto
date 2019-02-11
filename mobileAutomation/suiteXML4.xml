@@ -1,15 +1,35 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite parallel="tests" name="Suite" thread-count="5">
-  <test name="Test1">
-      <parameter name="deviceID" value="AVY9KA9631301284"  />
-      <parameter name="version" value="5.1"  />
-    <classes>
 
-       <class name="appium.webParralel.AppLaunchClass"/>
-       <class name="appium.webParralel.Swipe"/>
-      
-    </classes>
- </test> 
+<suite name="Suite" verbose="1" parallel="tests" thread-count="5">
+
+    <test name="iOS_1">
+        <parameter name="udid" value="e4147fb9af8b3811d81b3e0f978b4fad8b9d7e35"/>
+        <parameter name="version" value="11.3.1"/>
+ 		<parameter name="wdaLocalPort" value="8100"/>
+ 		<parameter name="deviceName" value="iPhone8"/>
+        <classes>
+            <class name="TestClass.iOSStartUP"/>
+            <class name="TestClass.TestScriptIOS"/>
+           
+        </classes>
+    </test>
+    
+    <test name="iOS_2">
+        <parameter name="udid" value="b4b1f417e6e817b162ec6541a5cb6e3a1e5bfb3f"/>
+        <parameter name="version" value="11.4.1"/>
+		<parameter name="wdaLocalPort" value="8107"/>
+		<parameter name="deviceName" value="iPhone"/>
+
+
+ <classes>
+            <class name="TestClass.iOSStartUP"/>
+            <class name="TestClass.TestScriptIOS"/>
+           
+        </classes>
  
- 
- </suite> 
+  </test>
+  
+
+
+
+</suite>
