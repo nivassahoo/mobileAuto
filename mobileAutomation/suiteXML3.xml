@@ -1,15 +1,32 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite parallel="tests" name="Suite" thread-count="5">
-  <test name="Test1">
-      <parameter name="deviceID" value="AVY9KA9631301284"  />
-      <parameter name="version" value="5.1"  />
-    <classes>
+<suite name="Suite" verbose="1" parallel="tests" thread-count="10">
+<!-- <parameter name="portNum" value="6565"/>  -->
+    <test name="Samsung">
+        <parameter name="deviceName" value="HNB397CS"/>
+        <parameter name="version" value="7.1.1"/>
+<!--        <parameter name="chromePort" value="9515"/>   -->
+<!--        <parameter name="chromeDriverPath" value="/Users/nivassahoo/Documents/workspace_nivas/nativeDigiNext/chromedriver"/> -->
+<!-- 		<parameter name="portNum" value="4723"/>  -->
+ 		
+        <classes>
+            <class name="TestClass.StartUP"/>
+            <class name="TestClass.TestScript"/>
+        </classes>
+    </test>
+    
+    <test name="Infinix">
+        <parameter name="deviceName" value="0216610742402999"/>
+        <parameter name="version" value="6.0"/>
+<!--         <parameter name="chromePort" value="9520"/> -->
+<!--         <parameter name="chromeDriverPath" value="/Users/nivassahoo/Documents/workspace_nivas/nativeDigiNext/chromedriver"/> -->
+<!--  		<parameter name="portNum" value="4724"/>  -->
 
-       <class name="appium.webParralel.AppLaunchClass"/>
-       <class name="appium.webParralel.Swipe"/>
-      
-    </classes>
- </test> 
+
+        <classes>
+            <class name="TestClass.StartUP"/>
+            <class name="TestClass.TestScript"/>
+        </classes>
+    </test>
  
  
  </suite> 
