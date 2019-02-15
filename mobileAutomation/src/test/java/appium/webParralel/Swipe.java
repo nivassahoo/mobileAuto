@@ -14,8 +14,9 @@ import io.appium.java_client.touch.offset.PointOption;
 
 public class Swipe extends AndroidNativeLaunchClass {
 	
-	Dimension size;
+	static Dimension size;
 	WebDriverWait wait;
+	static MobileElement element;
 	
   @Test
   public void swipe(){
@@ -103,5 +104,148 @@ void swipeBasedOnDirection(String direction,int iteration)
   {
 	  
   }
+	
+ @SuppressWarnings("rawtypes")
+	public static void swipeIOS(String direction,int iteration,AppiumDriver<MobileElement> driver)
+	{
+		  size=driver.manage().window().getSize();
+		  int startX,startY,endX,endY;
+		  while(iteration>0)
+		  {
+			  switch(direction.toUpperCase())
+		  
+		  {
+		  
+	      case "LEFT":
+	          startY = (int) (size.height / 2);
+	          startX = (int) (size.width * 0.90);
+	          endX = (int) (size.width * 0.10);
+	          new TouchAction(driver)
+	          .longPress(PointOption.point(startX, startY))
+	          .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+	          .moveTo(PointOption.point(endX, startY))
+	          .release()
+	          .perform();
+	                  
+	          break;
+
+	      case "RIGHT":
+	          startY = (int) (size.height / 2);
+	          startX = (int) (size.width * 0.20);
+	          endX = (int) (size.width * 0.90);
+	          new TouchAction(driver)
+	          .press(PointOption.point(startX,startY))
+	          .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+	          .moveTo(PointOption.point(endX, startY))
+	          .release()
+	          .perform();
+	          break;
+
+	      case "UP":
+	          endY = (int) (size.height * 0.90);
+	          startY = (int) (size.height * 0.20);
+	          startX = (size.width / 2);
+	          new TouchAction(driver)
+	          .press(PointOption.point(startX,startY))
+	          .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+	          .moveTo(PointOption.point(startX, endY))
+	          .release()
+	          .perform();
+	          break;
+
+
+	      case "DOWN":
+	          startY = (int) (size.height * 0.80);
+	          endY = (int) (size.height * 0.20);
+	          startX = (size.width / 2);
+	          new TouchAction(driver)
+	          .longPress(PointOption.point(startX,startY))
+	          .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+	          .moveTo(PointOption.point(startX, endY))
+	          .release()
+	          .perform();
+
+	          break;
+		  }
+		  iteration--;
+		  }
+	}
+
+	public static void swipeUiSelectorIOS(String strText,AppiumDriver<MobileElement> driver)
+	{
+		driver.findElement(MobileBy.IosUIAutomation(
+				"new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textMatches(\""
+						+ strText + "\").instance(0))"));
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public static void swipeUntilTextFound(String strText,AppiumDriver<MobileElement> driver,String direction)
+	{
+		 size=driver.manage().window().getSize();
+		  int startX,startY,endX,endY;
+		  
+		//	while(driver.findElement(By.xpath("//*[contains(@name,'"+strText+"')]")).getAttribute("visible").equalsIgnoreCase("false"))
+			while(!driver.findElement(By.xpath("//*[contains(@name,'"+strText+"')]")).isDisplayed())	
+			{
+			
+				
+		    switch(direction.toUpperCase())
+		  {
+		      case "LEFT":
+	          startY = (int) (size.height / 2);
+	          startX = (int) (size.width * 0.90);
+	          endX = (int) (size.width * 0.10);
+	          new TouchAction(driver)
+	          .longPress(PointOption.point(startX, startY))
+	          .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+	          .moveTo(PointOption.point(endX, startY))
+	          .release()
+	          .perform();
+	                  
+	          break;
+
+	      case "RIGHT":
+	          startY = (int) (size.height / 2);
+	          startX = (int) (size.width * 0.20);
+	          endX = (int) (size.width * 0.90);
+	          new TouchAction(driver)
+	          .press(PointOption.point(startX,startY))
+	          .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+	          .moveTo(PointOption.point(endX, startY))
+	          .release()
+	          .perform();
+	          break;
+
+	      case "UP":
+	          endY = (int) (size.height * 0.60);
+	          startY = (int) (size.height * 0.20);
+	          startX = (size.width / 2);
+	          new TouchAction(driver)
+	          .press(PointOption.point(startX,startY))
+	          .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+	          .moveTo(PointOption.point(startX, endY))
+	          .release()
+	          .perform();
+	          break;
+
+
+	      case "DOWN":
+	          startY = (int) (size.height * 0.60);
+	          endY = (int) (size.height * 0.20);
+	          startX = (size.width / 2);
+	          new TouchAction(driver)
+	          .longPress(PointOption.point(startX,startY))
+	          .waitAction(WaitOptions.waitOptions(Duration.ofMillis(2000)))
+	          .moveTo(PointOption.point(startX, endY))
+	          .release()
+	          .perform();
+
+	          break;
+		  }
+		  
+		    System.out.println("Visibility is "+driver.findElement(By.xpath("//*[contains(@name,'"+strText+"')]")).getAttribute("visible"));
+		   
+		  }
+	}	
 
 }
