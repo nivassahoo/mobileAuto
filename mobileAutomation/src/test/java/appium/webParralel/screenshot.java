@@ -1,6 +1,4 @@
-
-package TestClass;
-
+package appium.webParralel;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
@@ -14,7 +12,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 
-public class screenshot extends StartUP{
+public class screenshot extends AndroidStartUp{
 	 File dest;
 	 static String destBase64;
 	

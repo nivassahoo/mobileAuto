@@ -1,4 +1,4 @@
-package TestClass;
+package appium.webParralel;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,7 +29,7 @@ import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 
-public class StartUP {
+public class AndroidStartUp {
 	
 	 DesiredCapabilities capabilities;
 	 AndroidDriver<MobileElement> driver;
