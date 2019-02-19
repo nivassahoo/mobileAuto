@@ -1,21 +1,53 @@
-package appium.webParralel;
+package TestClass;
 
-import org.testng.annotations.Test;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
-public class AndroidStartUp {
-   DesiredCapabilities capabilities;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.appium.java_client.service.local.flags.GeneralServerFlag;
+
+public class StartUP {
+	
+	 DesiredCapabilities capabilities;
 	 AndroidDriver<MobileElement> driver;
 	 URL url;
 	static File src;
 	static FileInputStream fis;
 	static Properties pro;
+	String platformNm;
 	 AppiumServiceBuilder appiumServiceBuilder;
 	 AppiumDriverLocalService appiumDriverLocalService;
 	 String serviceURL;
+	 ExtentHtmlReporter htmlReporter;
+	 ExtentReports extent;
+	 ExtentTest test;
 	
 	@BeforeSuite(enabled=true)
-	@Parameters("portNum")
-	public void configIntilization(@Optional Integer portNum) throws Exception
+	
+	public void configIntilization() throws Exception
 	{
 		
 		 src=new File("src/Config/objectRepo.properties");
@@ -28,6 +60,11 @@ public class AndroidStartUp {
 		 
 		
 		pro.load(fis);
+	
+	    
+	    
+	    
+	    
 		
 	//	StartAppiumServer();
 		
@@ -55,12 +92,15 @@ public class AndroidStartUp {
 	//	serviceURL=appiumDriverLocalService.getUrl().toString();
 	}
 	
-	@AfterSuite
+	@AfterClass
 	public void tearDown()
 	{
 	/*	appiumDriverLocalService.stop();
 		runInTerminal("/usr/bin/killall -KILL node");
 		runInTerminal("/usr/bin/killall -KILL chromedriver");*/
+		
+		extent.flush();
+		
 	}
 	
 	@AfterTest
@@ -97,24 +137,28 @@ public class AndroidStartUp {
 	
 	
 	
-	@Parameters({ "deviceName","version","chromePort", "portNum","chromeDriverPath" })
+	@Parameters({ "deviceName","version","platformName","chromePort", "portNum","chromeDriverPath"})
 	@BeforeClass
-	public void test(  String deviceName , String version , @Optional String chromePort, @Optional String portNum,@Optional String chromePath) throws Exception
+	public void test(  String deviceName , String version,@Optional String platformName,@Optional String chromePort,@Optional String portNum,@Optional String chromeDriverPath) throws Exception
 	{
 		 capabilities=DesiredCapabilities.android();
-		 System.out.println("Inside Desired Capabilities of Android");
-		 capabilities.setCapability(MobileCapabilityType.BROWSER_NAME,BrowserType.CHROME);
+		// System.out.println("Inside Desired Capabilities of Android");
+		 capabilities.setCapability(MobileCapabilityType.BROWSER_NAME,"");
 	 
 		 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME,Platform.ANDROID);
 	
 		 capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION,version);
 		 
 		 
-		/* capabilities.setCapability("appPackage","com.android.chrome");
+		 capabilities.setCapability("appPackage","com.dbs.id.dbsdigibank");
 		 
-		 capabilities.setCapability("appPackage","com.google.android.apps.chrome.Main");*/
+		 capabilities.setCapability("appActivity","com.dbs.id.dbsdigibank.ui.splash.SplashActivity");
 		 
 		 capabilities.setCapability("--session-override",true);
+		 capabilities.setCapability("noReset", true);
+		 capabilities.setCapability("fullReset", false);
+		 capabilities.setCapability("autoAcceptAlerts",true);
+		 platformNm=platformName;
 //		 
 //		 capabilities.setCapability("systemPort", Integer.parseInt(portNum));
 		 
@@ -145,8 +189,11 @@ public class AndroidStartUp {
 		 
 		 driver = new AndroidDriver<MobileElement>(url,capabilities);
 		 driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-		 driver.get("https://www.google.com/");
+		// driver.get("https://www.google.com/");
 		 System.out.println(driver.getSessionDetails());
+		 htmlReporter = new ExtentHtmlReporter("./extentTest.html");
+		 extent = new ExtentReports();
+		 extent.attachReporter(htmlReporter);
 		 
 	}
 	
