@@ -1,6 +1,24 @@
 package appium.webParralel;
 
-import org.testng.annotations.Test;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URL;
+import java.util.Properties;
+
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.appium.java_client.service.local.flags.GeneralServerFlag;
 
 public class AndroidStartUp2 {
   static DesiredCapabilities capabilities;
