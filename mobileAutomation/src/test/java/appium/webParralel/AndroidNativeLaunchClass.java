@@ -21,6 +21,9 @@ public class AndroidNativeLaunchClass {
 	public DesiredCapabilities capabilities;
 	public URL url;
 	public WebDriverWait wait;
+	 ExtentHtmlReporter htmlReporter;
+	 ExtentReports extent;
+	 ExtentTest test;
 	
 	
   @Parameters({ "deviceID","version","port", "serverurl" })
@@ -63,10 +66,25 @@ public class AndroidNativeLaunchClass {
 	  /*driver.get("http://www.google.com");*/
 	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	  wait=new WebDriverWait(driver, 30);
+	  htmlReporter = new ExtentHtmlReporter("./extentTestwithCapture.html");
+	  extent = new ExtentReports();
+          extent.attachReporter(htmlReporter);
+	  
 	 
 	 
 	
   }
+	
+	@AfterClass
+	public void tearDown()
+	{
+	/*	appiumDriverLocalService.stop();
+		runInTerminal("/usr/bin/killall -KILL node");
+		runInTerminal("/usr/bin/killall -KILL chromedriver");*/
+		
+		extent.flush();
+		
+	}
 
   AndroidDriver<MobileElement> getDriver()
   {
