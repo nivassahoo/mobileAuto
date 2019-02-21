@@ -9,8 +9,10 @@ public class hideKeyboard {
 	
 	
 	
-	public void hideKeyboardAndroid(AndroidDriver<MobileElement> driver)
+	public void hideKeyboardAndroid(AppiumDriver<MobileElement> driver)
 	{
+		((AndroidDriver<MobileElement>) driver).pressKey(new KeyEvent(AndroidKey.BACK));
+		((AndroidDriver<MobileElement>) driver).hideKeyboard();
 		
 	}
 	
