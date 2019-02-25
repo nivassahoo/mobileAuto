@@ -1,10 +1,9 @@
+package appium.webParralel;
 
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.ScreenOrientation;
 import org.testng.annotations.Test;
 
-public class screenOrientation {
+public class screenOrientation extends AndroidNativeLaunchClass{
 
 
 
